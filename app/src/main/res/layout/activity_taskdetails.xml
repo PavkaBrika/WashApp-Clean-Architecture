@@ -3,6 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/infolayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg"
+        android:backgroundTint="@color/teal_700"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_above="@id/setDateButton">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/taskdetailsinfo"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/setDateButton"
         android:layout_width="match_parent"
@@ -15,6 +49,6 @@
         android:background="@drawable/dialog_bg"
         android:backgroundTint="@color/teal_700"
         android:cropToPadding="false"
-        android:text="@string/setdate"/>
+        android:text="@string/setfreq"/>
 
 </RelativeLayout>

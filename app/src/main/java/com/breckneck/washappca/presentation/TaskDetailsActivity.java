@@ -28,8 +28,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
     long zoneId;
     String taskName;
 
-    Calendar date = Calendar.getInstance();
-
     DataBaseTaskStorageImpl dataBaseTaskStorage;
     TaskRepositoryImpl taskRepository;
     DeleteTaskUseCase deleteTaskUseCase;
@@ -52,18 +50,11 @@ public class TaskDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(zoneName + " - " + taskName);
 
 
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-
-            }
-        };
-
         Button button = findViewById(R.id.setDateButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(TaskDetailsActivity.this, dateSetListener, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH)).show();
+
             }
         });
 

@@ -23,5 +23,9 @@
     <string name="Chooseanewzone">Choose a new zone</string>
     <string name="chooseanewtask">Choose a new task</string>
     <string name="tasks">Tasks</string>
-    <string name="setdate">Set the next reminder date</string>
+    <string name="setfreq">Set the frequency of notifications</string>
+    <string name="taskdetailsinfo">First, set the frequency of notifications.
+        You will receive a notification every time the set day arrives.
+        If you completed the task earlier, then click the "Done" button at the bottom of the screen - the time until the next notification will be updated.</string>
+    <string name="hint">Hint!</string>
 </resources>
