@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/zonename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="fasdf"
+        android:gravity="start"
+        android:layout_margin="8dp"
+        android:paddingBottom="64dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="16dp"
+        android:background="@drawable/backgroundcolorrecycler" />
+
+    <ImageView
+        android:id="@+id/zonepic"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:baselineAlignBottom="false" />
+
+
+</RelativeLayout>

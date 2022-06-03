@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">WashApp</string>
+    <string name="addnewroombutton">Add new room</string>
+    <string name="addnewroomedittexthint">Enter new room</string>
+    <string name="OK">OK</string>
+    <string name="addnewtaskbutton">Add new task</string>
+    <string name="deletezone">Delete zone</string>
+    <string name="deletetask">Delete task</string>
+    <string name="alertdialogdeletezonebutton">Are you sure You want to delete this zone?</string>
+    <string name="alertdialogdeletetaskbutton">Are you sure You want to delete this task?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="livingroom">Living room</string>
+    <string name="Hallway">Hallway</string>
+    <string name="Kitchen">Kitchen</string>
+    <string name="Bedroom">Bedroom</string>
+    <string name="Bathroom">Bathroom</string>
+    <string name="Toilet">Toilet</string>
+    <string name="Childrensroom">Children`s room</string>
+    <string name="Balcony">Balcony</string>
+    <string name="car">Car</string>
+    <string name="Myversion">My version</string>
+    <string name="Chooseanewzone">Choose a new zone</string>
+    <string name="chooseanewtask">Choose a new task</string>
+    <string name="tasks">Tasks</string>
+    <string name="setdate">Set the next reminder date</string>
+</resources>
