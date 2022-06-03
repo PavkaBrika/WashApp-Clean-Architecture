@@ -8,6 +8,8 @@
         android:right="7dp"
         android:bottom="7dp" />
     <gradient
+        android:startColor="#81D4FA"
+        android:endColor="#4FC3F7"
         android:angle="45">
     </gradient>
 </shape>
