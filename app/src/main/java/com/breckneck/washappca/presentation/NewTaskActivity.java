@@ -44,7 +44,7 @@ public class NewTaskActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.spinnerTask);
 
         String[] taskNames = {getString(R.string.livingroom), getString(R.string.Hallway), getString(R.string.Kitchen), getString(R.string.Bedroom), getString(R.string.Bathroom),
-                getString(R.string.Toilet), getString(R.string.Childrensroom), getString(R.string.Bathroom),getString(R.string.car), getString(R.string.Myversion)};
+                getString(R.string.Toilet), getString(R.string.Childrensroom), getString(R.string.Bathroom),getString(R.string.car), getString(R.string.Custom)};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, taskNames);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -53,7 +53,7 @@ public class NewTaskActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                 String item = (String) parent.getItemAtPosition(position);
-                if (item.equals(getString(R.string.Myversion))) {
+                if (item.equals(getString(R.string.Custom))) {
                     newTaskName.setVisibility(View.VISIBLE);
                     myvariant = true;
                 }

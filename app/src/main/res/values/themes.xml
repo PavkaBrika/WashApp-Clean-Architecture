@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.WashApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">#51b3ff</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/statusbarcolor</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/teal_200</item>

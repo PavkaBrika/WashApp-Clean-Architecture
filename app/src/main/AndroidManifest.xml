@@ -26,6 +26,9 @@
             android:theme="@style/DialogActivities"
             android:label="@string/chooseanewtask"/>
         <activity android:name=".presentation.TaskDetailsActivity" />
+        <activity android:name=".presentation.FrequencyOfNotifyActivity"
+            android:theme="@style/DialogActivities"
+            android:label="@string/setfreq" />
     </application>
 
 </manifest>

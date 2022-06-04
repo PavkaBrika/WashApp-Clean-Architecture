@@ -48,5 +48,12 @@ public class DataBaseTaskStorageImpl implements TaskStorage {
         db.zoneDao().deleteTask(db.zoneDao().getTaskById(task.id));
     }
 
+    @Override
+    public void updateTask(long id, int frequency) {
+        Task task = db.zoneDao().getTaskById(id);
+        task.frequency = frequency;
+        db.zoneDao().updateTask(task);
+    }
+
 
 }

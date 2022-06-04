@@ -1,6 +1,7 @@
 package com.breckneck.washappca.presentation;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,11 +47,13 @@ public class TaskDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(zoneName + " - " + taskName);
 
 
-        Button button = findViewById(R.id.setDateButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button setDateButton = findViewById(R.id.setDateButton);
+        setDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(TaskDetailsActivity.this, FrequencyOfNotifyActivity.class);
+                intent.putExtra("taskid", id);
+                startActivity(intent);
             }
         });
 

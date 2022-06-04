@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/backgroundcolor.xml" value="0.1695" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/backgroundcolorrecycler.xml" value="0.2155" />
+        <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/buttons_bg.xml" value="0.1695" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/dialog_bg.xml" value="0.139" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/ic_outline_add_circle_outline_24.xml" value="0.139" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_addnewtask.xml" value="0.3103890551517743" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_addnewzone.xml" value="0.3378623188405797" />
+        <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_frequencyofnotify.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_taskdetails.xml" value="0.37864583333333335" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/layout/activity_zonedetails.xml" value="0.37864583333333335" />

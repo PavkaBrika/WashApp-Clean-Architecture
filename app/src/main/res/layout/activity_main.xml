@@ -34,7 +34,6 @@
                 android:layout_marginBottom="8dp"
                 android:adjustViewBounds="false"
                 android:background="@drawable/dialog_bg"
-                android:backgroundTint="@color/teal_700"
                 android:cropToPadding="false" />
 
             <ImageView

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="statusbarcolor">#0072cb</color>
     <color name="actionbarcolor">#4da0ff</color>
+    <color name="blue">#51b3ff</color>
 </resources>

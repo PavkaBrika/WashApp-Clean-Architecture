@@ -37,4 +37,11 @@ public class TaskRepositoryImpl implements TaskRepository {
         task.id = id;
         taskStorage.deleteTask(task);
     }
+
+    @Override
+    public void updateTask(long id, int frequency) {
+        taskStorage.updateTask(id, frequency);
+    }
+
+
 }

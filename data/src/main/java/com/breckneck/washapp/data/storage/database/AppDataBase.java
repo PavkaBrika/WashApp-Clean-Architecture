@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import com.breckneck.washapp.data.storage.entity.Task;
 import com.breckneck.washapp.data.storage.entity.Zone;
 
-@Database(entities = {Zone.class, Task.class}, version = 2)
+@Database(entities = {Zone.class, Task.class}, version = 3)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract ZoneDao zoneDao();
 }

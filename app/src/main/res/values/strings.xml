@@ -19,7 +19,7 @@
     <string name="Childrensroom">Children`s room</string>
     <string name="Balcony">Balcony</string>
     <string name="car">Car</string>
-    <string name="Myversion">My version</string>
+    <string name="Custom">Custom</string>
     <string name="Chooseanewzone">Choose a new zone</string>
     <string name="chooseanewtask">Choose a new task</string>
     <string name="tasks">Tasks</string>
@@ -28,4 +28,20 @@
         You will receive a notification every time the set day arrives.
         If you completed the task earlier, then click the "Done" button at the bottom of the screen - the time until the next notification will be updated.</string>
     <string name="hint">Hint!</string>
+    <string name="everyday">Everyday</string>
+    <string name="twodays">2 days</string>
+    <string name="threedays">3 days</string>
+    <string name="fourdays">4 days</string>
+    <string name="fivedays">5 days</string>
+    <string name="sixdays">6 days</string>
+    <string name="oneweek">1 week</string>
+    <string name="twoweek">2 week</string>
+    <string name="threeweek">3 week</string>
+    <string name="onemonth">1 month</string>
+    <string name="twomonth">2 month</string>
+    <string name="threemonth">3 month</string>
+    <string name="forthmonth">4 month</string>
+    <string name="days">days</string>
+    <string name="done">done</string>
+
 </resources>

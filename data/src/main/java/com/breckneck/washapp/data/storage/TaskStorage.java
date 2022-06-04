@@ -11,4 +11,6 @@ public interface TaskStorage {
     public void insertTask(Task task);
 
     public void deleteTask(Task task);
+
+    public void updateTask(long id, int frequency);
 }

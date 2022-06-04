@@ -11,4 +11,6 @@ public interface TaskRepository {
     void insertTask(long id, String name);
 
     void deleteTask(long id);
+
+    void updateTask(long id, int frequency);
 }
