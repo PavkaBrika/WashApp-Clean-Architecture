@@ -43,5 +43,6 @@
     <string name="forthmonth">4 month</string>
     <string name="days">days</string>
     <string name="done">done</string>
+    <string name="cleaningafter">Cleaning after:</string>
 
 </resources>

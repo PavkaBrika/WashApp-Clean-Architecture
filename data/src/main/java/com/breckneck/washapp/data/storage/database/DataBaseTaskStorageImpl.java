@@ -61,4 +61,10 @@ public class DataBaseTaskStorageImpl implements TaskStorage {
         return task;
     }
 
+    @Override
+    public int getTaskFrequency(long id) {
+        Task task = db.zoneDao().getTaskById(id);
+        return task.frequency;
+    }
+
 }

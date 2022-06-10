@@ -15,4 +15,6 @@ public interface TaskRepository {
     void updateTask(long id, int frequency);
 
     TaskApp checkFrequency(long id);
+
+    int getTaskFrequency(long id);
 }

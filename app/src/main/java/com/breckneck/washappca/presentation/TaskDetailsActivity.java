@@ -19,6 +19,7 @@ import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
 import com.breckneck.washapp.domain.usecase.Task.CheckFrequencyUseCase;
 import com.breckneck.washapp.domain.usecase.Task.DeleteTaskUseCase;
+import com.breckneck.washapp.domain.usecase.Task.GetTimeToNotificationUseCase;
 import com.breckneck.washappca.R;
 
 public class TaskDetailsActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
     TaskRepositoryImpl taskRepository;
     DeleteTaskUseCase deleteTaskUseCase;
     CheckFrequencyUseCase checkFrequencyUseCase;
+    GetTimeToNotificationUseCase getTimeToNotificationUseCase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         dataBaseTaskStorage = new DataBaseTaskStorageImpl(getApplicationContext());
         taskRepository = new TaskRepositoryImpl(dataBaseTaskStorage);
         checkFrequencyUseCase = new CheckFrequencyUseCase(taskRepository);
+        getTimeToNotificationUseCase = new GetTimeToNotificationUseCase(taskRepository);
 
         setDateButton = findViewById(R.id.setDateButton);
         taskInfo = findViewById(R.id.taskInfo);
@@ -85,6 +88,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
             done.setVisibility(View.VISIBLE);
             setDateButton.setVisibility(View.GONE);
             infoLayout.setVisibility(View.GONE);
+            taskInfo.setText(getString(R.string.cleaningafter) + " " + getTimeToNotificationUseCase.execute(id));
         } else {
             taskInfo.setVisibility(View.GONE);
             done.setVisibility(View.GONE);

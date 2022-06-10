@@ -15,4 +15,6 @@ public interface TaskStorage {
     public void updateTask(long id, int frequency);
 
     public Task checkTask(long id);
+
+    public int getTaskFrequency(long id);
 }

@@ -51,5 +51,10 @@ public class TaskRepositoryImpl implements TaskRepository {
         return taskApp;
     }
 
+    @Override
+    public int getTaskFrequency(long id) {
+        return taskStorage.getTaskFrequency(id);
+    }
+
 
 }
