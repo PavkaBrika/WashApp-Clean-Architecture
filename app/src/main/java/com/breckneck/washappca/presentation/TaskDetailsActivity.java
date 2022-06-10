@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
+import com.breckneck.washapp.domain.usecase.Task.CheckFrequencyUseCase;
 import com.breckneck.washapp.domain.usecase.Task.DeleteTaskUseCase;
 import com.breckneck.washappca.R;
 
@@ -25,9 +28,15 @@ public class TaskDetailsActivity extends AppCompatActivity {
     long zoneId;
     String taskName;
 
+    Button setDateButton;
+    Button done;
+    TextView taskInfo;
+    LinearLayout infoLayout;
+
     DataBaseTaskStorageImpl dataBaseTaskStorage;
     TaskRepositoryImpl taskRepository;
     DeleteTaskUseCase deleteTaskUseCase;
+    CheckFrequencyUseCase checkFrequencyUseCase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +56,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(zoneName + " - " + taskName);
 
 
-        Button setDateButton = findViewById(R.id.setDateButton);
+        setDateButton = findViewById(R.id.setDateButton);
         setDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,8 +65,32 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        dataBaseTaskStorage = new DataBaseTaskStorageImpl(getApplicationContext());
+        taskRepository = new TaskRepositoryImpl(dataBaseTaskStorage);
+        checkFrequencyUseCase = new CheckFrequencyUseCase(taskRepository);
+
+        setDateButton = findViewById(R.id.setDateButton);
+        taskInfo = findViewById(R.id.taskInfo);
+        done = findViewById(R.id.done);
+        infoLayout = findViewById(R.id.infolayout);
+
+        if (checkFrequencyUseCase.execute(id)) {
+            taskInfo.setVisibility(View.VISIBLE);
+            done.setVisibility(View.VISIBLE);
+            setDateButton.setVisibility(View.GONE);
+            infoLayout.setVisibility(View.GONE);
+        } else {
+            taskInfo.setVisibility(View.GONE);
+            done.setVisibility(View.GONE);
+            setDateButton.setVisibility(View.VISIBLE);
+            infoLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

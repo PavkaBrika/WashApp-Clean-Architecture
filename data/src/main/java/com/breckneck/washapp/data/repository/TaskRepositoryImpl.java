@@ -43,5 +43,13 @@ public class TaskRepositoryImpl implements TaskRepository {
         taskStorage.updateTask(id, frequency);
     }
 
+    @Override
+    public TaskApp checkFrequency(long id) {
+        Task task = taskStorage.checkTask(id);
+        TaskApp taskApp = new TaskApp(task.id, task.zoneId, task.taskName);
+        taskApp.frequency = task.frequency;
+        return taskApp;
+    }
+
 
 }

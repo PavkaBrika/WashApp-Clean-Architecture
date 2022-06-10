@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
+import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
 import com.breckneck.washapp.domain.usecase.Task.SetFrequencyUseCase;
 import com.breckneck.washappca.R;
 
@@ -27,6 +29,10 @@ public class FrequencyOfNotifyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frequencyofnotify);
+
+        DataBaseTaskStorageImpl dataBaseTaskStorage = new DataBaseTaskStorageImpl(getApplicationContext());
+        TaskRepositoryImpl taskRepository = new TaskRepositoryImpl(dataBaseTaskStorage);
+        SetFrequencyUseCase setFrequencyUseCase = new SetFrequencyUseCase(taskRepository);
 
         View v = getWindow().getDecorView();
         v.setBackgroundResource(android.R.color.transparent);
@@ -77,8 +83,8 @@ public class FrequencyOfNotifyActivity extends AppCompatActivity {
                 if (myvariant) {
                     customFrequency = customFreq.getText().toString();
                 }
-                Toast.makeText(getApplicationContext(), positionFrequency, Toast.LENGTH_SHORT).show();
-//                SetFrequencyUseCase.execute(id, positionFrequency, customFrequency, myvariant);
+                Toast.makeText(getApplicationContext(), "gello " + positionFrequency, Toast.LENGTH_SHORT).show();
+                setFrequencyUseCase.execute(id, positionFrequency, customFrequency, myvariant);
                 finish();
             }
         });

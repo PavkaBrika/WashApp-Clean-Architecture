@@ -17,40 +17,40 @@ public class SetFrequencyUseCase {
             frequency = Integer.parseInt(customFrequency);
         }
         switch (positionFrequency) {
-            case 1:
+            case 0:
                 frequency = 1;
                 break;
-            case 2:
+            case 1:
                 frequency = 2;
                 break;
-            case 3:
+            case 2:
                 frequency = 3;
                 break;
-            case 4:
+            case 3:
                 frequency = 4;
                 break;
-            case 5:
+            case 4:
                 frequency = 5;
                 break;
-            case 6:
+            case 5:
                 frequency = 6;
                 break;
-            case 7:
+            case 6:
                 frequency = 7;
                 break;
-            case 8:
+            case 7:
                 frequency = 14;
                 break;
-            case 9:
+            case 8:
                 frequency = 21;
                 break;
-            case 10:
+            case 9:
                 frequency = 30;
                 break;
-            case 11:
+            case 10:
                 frequency = 60;
                 break;
-            case 12:
+            case 11:
                 frequency = 90;
                 break;
         }

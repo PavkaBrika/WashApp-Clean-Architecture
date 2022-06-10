@@ -55,5 +55,10 @@ public class DataBaseTaskStorageImpl implements TaskStorage {
         db.zoneDao().updateTask(task);
     }
 
+    @Override
+    public Task checkTask(long id) {
+        Task task = db.zoneDao().getTaskById(id);
+        return task;
+    }
 
 }

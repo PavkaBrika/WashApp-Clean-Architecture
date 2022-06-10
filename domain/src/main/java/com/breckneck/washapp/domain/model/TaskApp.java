@@ -5,6 +5,7 @@ public class TaskApp {
     public long id;
     public long zoneId;
     public String taskName;
+    public int frequency;
 
     public TaskApp(long id, long zoneId, String taskName) {
         this.id = id;
@@ -34,5 +35,13 @@ public class TaskApp {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 }

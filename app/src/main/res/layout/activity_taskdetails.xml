@@ -5,23 +5,31 @@
     style="@style/MainActivityBackground">
 
     <TextView
+        android:id="@+id/taskInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/dialog_bg"
+        android:backgroundTint="@color/actionbarcolor"
         android:text="afsadfasdf"
         android:textSize="30sp"
-        android:backgroundTint="@color/actionbarcolor"
-        android:background="@drawable/dialog_bg"
-        android:layout_margin="16dp"/>
+        android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/infolayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/setDateButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/dialog_bg"
         android:backgroundTint="@color/teal_700"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:layout_above="@id/setDateButton">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -73,6 +81,6 @@
 
         android:cropToPadding="false"
         android:text="@string/done"
-        android:visibility="visible"/>
+        android:visibility="gone" />
 
 </RelativeLayout>

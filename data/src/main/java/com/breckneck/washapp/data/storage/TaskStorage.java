@@ -13,4 +13,6 @@ public interface TaskStorage {
     public void deleteTask(Task task);
 
     public void updateTask(long id, int frequency);
+
+    public Task checkTask(long id);
 }

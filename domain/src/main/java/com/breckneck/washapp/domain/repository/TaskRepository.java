@@ -13,4 +13,6 @@ public interface TaskRepository {
     void deleteTask(long id);
 
     void updateTask(long id, int frequency);
+
+    TaskApp checkFrequency(long id);
 }
