@@ -44,5 +44,7 @@
     <string name="days">days</string>
     <string name="done">done</string>
     <string name="cleaningafter">Cleaning after:</string>
+    <string name="edittask">Edit task</string>
+    <string name="edittaskname">Edit task name</string>
 
 </resources>

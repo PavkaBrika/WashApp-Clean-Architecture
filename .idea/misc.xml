@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Android Apps/WashAppCA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Android/Android Apps/WashAppCA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Android/Android Apps/WashAppCA/app/src/main/res/layout/activity_frequencyofnotify.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Android Apps/WashAppCA/app/src/main/res/layout/activity_taskdetails.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android/Android Apps/WashAppCA/app/src/main/res/menu/menu_activity_taskdetails.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/backgroundcolorrecycler.xml" value="0.2155" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/dialog_bg.xml" value="0.139" />
         <entry key="..\:/AndroidPrograms/WashAppCA/app/src/main/res/drawable/ic_outline_add_circle_outline_24.xml" value="0.139" />

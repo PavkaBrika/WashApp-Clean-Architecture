@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<!--    <EditText-->
+<!--        android:id="@+id/editNameEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:hint="@string/edittaskname"-->
+<!--        android:visibility="gone"/>-->
+
     <Spinner
         android:id="@+id/spinnerFreq"
         android:layout_width="match_parent"

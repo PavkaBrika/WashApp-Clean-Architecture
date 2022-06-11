@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
+import com.breckneck.washapp.domain.usecase.Task.CheckFrequencyUseCase;
 import com.breckneck.washapp.domain.usecase.Task.SetFrequencyUseCase;
 import com.breckneck.washappca.R;
 
@@ -33,6 +34,7 @@ public class FrequencyOfNotifyActivity extends AppCompatActivity {
         DataBaseTaskStorageImpl dataBaseTaskStorage = new DataBaseTaskStorageImpl(getApplicationContext());
         TaskRepositoryImpl taskRepository = new TaskRepositoryImpl(dataBaseTaskStorage);
         SetFrequencyUseCase setFrequencyUseCase = new SetFrequencyUseCase(taskRepository);
+//        CheckFrequencyUseCase checkFrequencyUseCase = new CheckFrequencyUseCase(taskRepository);
 
         View v = getWindow().getDecorView();
         v.setBackgroundResource(android.R.color.transparent);
@@ -51,6 +53,14 @@ public class FrequencyOfNotifyActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.spinnerFreq);
         EditText customFreq = findViewById(R.id.customFreq);
         LinearLayout layout = findViewById(R.id.editTextLayout);
+//        EditText taskName = findViewById(R.id.editNameEditText);
+
+//        if (checkFrequencyUseCase.execute(id)) {
+//            taskName.setVisibility(View.VISIBLE);
+//        } else {
+//            taskName.setVisibility(View.GONE);
+//        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, frequencyList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -80,12 +90,16 @@ public class FrequencyOfNotifyActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myvariant) {
-                    customFrequency = customFreq.getText().toString();
-                }
-                Toast.makeText(getApplicationContext(), "gello " + positionFrequency, Toast.LENGTH_SHORT).show();
-                setFrequencyUseCase.execute(id, positionFrequency, customFrequency, myvariant);
-                finish();
+//                if (checkFrequencyUseCase.execute(id)) {
+//
+//                } else {
+                    if (myvariant) {
+                        customFrequency = customFreq.getText().toString();
+                    }
+                    Toast.makeText(getApplicationContext(), "gello " + positionFrequency, Toast.LENGTH_SHORT).show();
+                    setFrequencyUseCase.execute(id, positionFrequency, customFrequency, myvariant);
+                    finish();
+//                }
             }
         });
     }

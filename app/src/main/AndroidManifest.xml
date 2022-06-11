@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WashApp">
+        <receiver
+            android:name=".broadcastreceiver.NotificationReceiver" >
+        </receiver>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
@@ -20,15 +23,24 @@
         </activity>
         <activity android:name=".presentation.NewZoneActivity"
             android:theme="@style/DialogActivities"
-            android:label="@string/Chooseanewzone" />
-        <activity android:name=".presentation.ZoneDetailsActivity" />
-        <activity android:name=".presentation.NewTaskActivity"
+            android:label="@string/Chooseanewzone" >
+        </activity>
+        <activity
+            android:name=".presentation.ZoneDetailsActivity" >
+        </activity>
+        <activity
+            android:name=".presentation.NewTaskActivity"
             android:theme="@style/DialogActivities"
-            android:label="@string/chooseanewtask"/>
-        <activity android:name=".presentation.TaskDetailsActivity" />
-        <activity android:name=".presentation.FrequencyOfNotifyActivity"
+            android:label="@string/chooseanewtask">
+        </activity>
+        <activity
+            android:name=".presentation.TaskDetailsActivity" >
+        </activity>
+        <activity
+            android:name=".presentation.FrequencyOfNotifyActivity"
             android:theme="@style/DialogActivities"
-            android:label="@string/setfreq" />
+            android:label="@string/setfreq" >
+        </activity>
     </application>
 
 </manifest>

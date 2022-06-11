@@ -1,5 +1,8 @@
 package com.breckneck.washappca.presentation;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
@@ -21,6 +26,9 @@ import com.breckneck.washapp.domain.usecase.Task.CheckFrequencyUseCase;
 import com.breckneck.washapp.domain.usecase.Task.DeleteTaskUseCase;
 import com.breckneck.washapp.domain.usecase.Task.GetTimeToNotificationUseCase;
 import com.breckneck.washappca.R;
+import com.breckneck.washappca.broadcastreceiver.NotificationReceiver;
+
+import java.util.Calendar;
 
 public class TaskDetailsActivity extends AppCompatActivity {
 
@@ -67,6 +75,31 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        done = findViewById(R.id.done);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Calendar notifyme = Calendar.getInstance();
+//                notifyme.set(Calendar.HOUR_OF_DAY, 3);
+//                notifyme.set(Calendar.MINUTE, 55);
+//                notifyme.set(Calendar.SECOND, 0);
+//
+//                Intent intent = new Intent(TaskDetailsActivity.this, NotificationReceiver.class);
+//                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskDetailsActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+//                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notifyme.getTimeInMillis(), 5000, pendingIntent);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "test")
+                        .setSmallIcon(R.drawable.ic_outline_add_circle_outline_24)
+                        .setContentTitle("test")
+                        .setContentText("content text")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+                notificationManagerCompat.notify(101, builder.build());
+            }
+        });
+
     }
 
     @Override
@@ -125,6 +158,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 builder.setNegativeButton(R.string.no, null);
                 builder.show();
                 return true;
+//            case R.id.edit_task_button:
+//                Intent intent = new Intent(TaskDetailsActivity.this, FrequencyOfNotifyActivity.class);
+//                intent.putExtra("taskid", id);
+//                startActivity(intent);
             case android.R.id.home:
                 super.onBackPressed();
                 return true;
