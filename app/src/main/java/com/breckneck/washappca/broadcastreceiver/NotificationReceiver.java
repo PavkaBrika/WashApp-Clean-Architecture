@@ -16,9 +16,10 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_outline_add_circle_outline_24)
                 .setContentTitle("test")
                 .setContentText("content text")
+                .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(1, builder.build());
+        notificationManagerCompat.notify(101, builder.build());
     }
 }

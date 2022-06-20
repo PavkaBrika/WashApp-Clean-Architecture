@@ -1,11 +1,15 @@
 package com.breckneck.washappca.presentation;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +34,13 @@ import com.breckneck.washappca.broadcastreceiver.NotificationReceiver;
 
 import java.util.Calendar;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class TaskDetailsActivity extends AppCompatActivity {
 
     String zoneName;
@@ -47,6 +58,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
     DeleteTaskUseCase deleteTaskUseCase;
     CheckFrequencyUseCase checkFrequencyUseCase;
     GetTimeToNotificationUseCase getTimeToNotificationUseCase;
+
+    CompositeDisposable disposeBag = new CompositeDisposable();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,27 +89,25 @@ public class TaskDetailsActivity extends AppCompatActivity {
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("test", "test", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
         done = findViewById(R.id.done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Calendar notifyme = Calendar.getInstance();
-//                notifyme.set(Calendar.HOUR_OF_DAY, 3);
-//                notifyme.set(Calendar.MINUTE, 55);
-//                notifyme.set(Calendar.SECOND, 0);
-//
-//                Intent intent = new Intent(TaskDetailsActivity.this, NotificationReceiver.class);
-//                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskDetailsActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-//                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notifyme.getTimeInMillis(), 5000, pendingIntent);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "test")
-                        .setSmallIcon(R.drawable.ic_outline_add_circle_outline_24)
-                        .setContentTitle("test")
-                        .setContentText("content text")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                Calendar notifyme = Calendar.getInstance();
+                notifyme.set(Calendar.HOUR_OF_DAY, 0);
+                notifyme.set(Calendar.MINUTE, 33);
+                notifyme.set(Calendar.SECOND, 0);
 
-                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-                notificationManagerCompat.notify(101, builder.build());
+                Intent intent = new Intent(TaskDetailsActivity.this, NotificationReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskDetailsActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
             }
         });
 
@@ -116,18 +127,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         done = findViewById(R.id.done);
         infoLayout = findViewById(R.id.infolayout);
 
-        if (checkFrequencyUseCase.execute(id)) {
-            taskInfo.setVisibility(View.VISIBLE);
-            done.setVisibility(View.VISIBLE);
-            setDateButton.setVisibility(View.GONE);
-            infoLayout.setVisibility(View.GONE);
-            taskInfo.setText(getString(R.string.cleaningafter) + " " + getTimeToNotificationUseCase.execute(id));
-        } else {
-            taskInfo.setVisibility(View.GONE);
-            done.setVisibility(View.GONE);
-            setDateButton.setVisibility(View.VISIBLE);
-            infoLayout.setVisibility(View.VISIBLE);
-        }
+        checkFrequency(id);
     }
 
     @Override
@@ -151,7 +151,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteTaskUseCase.execute(id);
+//                        deleteTaskUseCase.execute(id);
+                        deleteTask(id);
                         finish();
                     }
                 });
@@ -167,5 +168,77 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkFrequency(long id) {
+        Disposable disposableCheck = Single.just(id)
+                .map(identificator -> {
+                    return checkFrequencyUseCase.execute(identificator);
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Boolean>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Boolean aBoolean) {
+                        if (aBoolean) {
+                            taskInfo.setVisibility(View.VISIBLE);
+                            done.setVisibility(View.VISIBLE);
+                            setDateButton.setVisibility(View.GONE);
+                            infoLayout.setVisibility(View.GONE);
+                        } else {
+                            taskInfo.setVisibility(View.GONE);
+                            done.setVisibility(View.GONE);
+                            setDateButton.setVisibility(View.VISIBLE);
+                            infoLayout.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+
+        Disposable disposableGetTime = Single.just(id)
+                .map(indentificator -> {
+                    return getTimeToNotificationUseCase.execute(id);
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Integer>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Integer integer) {
+                        taskInfo.setText(getString(R.string.cleaningafter) + " " + integer);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+
+        disposeBag.add(disposableCheck);
+        disposeBag.add(disposableGetTime);
+    }
+
+    public void deleteTask(long id) {
+        Disposable disposable = Single.just(id)
+                .map(identificator -> {
+                    deleteTaskUseCase.execute(identificator);
+                    return identificator;
+                })
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<Long>() {
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Long aLong) {
+                        Log.e("TAG", "Task " + aLong + " delete success");
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+                });
+        disposeBag.add(disposable);
     }
 }

@@ -2,6 +2,7 @@ package com.breckneck.washapp.data.storage.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -10,6 +11,11 @@ import com.breckneck.washapp.data.storage.entity.Zone;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DataBaseZoneStorageImpl implements ZoneStorage {
 
@@ -25,7 +31,7 @@ public class DataBaseZoneStorageImpl implements ZoneStorage {
 
     public DataBaseZoneStorageImpl(Context context) {
         this.context = context;
-        db = Room.databaseBuilder(context, AppDataBase.class, "ZoneDataBase").allowMainThreadQueries().build();
+        db = Room.databaseBuilder(context, AppDataBase.class, "ZoneDataBase").build();
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
     }
 

@@ -1,6 +1,7 @@
 package com.breckneck.washappca.presentation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,13 @@ import com.breckneck.washapp.data.repository.TaskRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
 import com.breckneck.washapp.domain.usecase.Task.AddTasksUseCase;
 import com.breckneck.washappca.R;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class NewTaskActivity extends AppCompatActivity {
 
@@ -31,6 +39,8 @@ public class NewTaskActivity extends AppCompatActivity {
         DataBaseTaskStorageImpl dataBaseTaskStorage = new DataBaseTaskStorageImpl(getApplicationContext());
         TaskRepositoryImpl taskRepository = new TaskRepositoryImpl(dataBaseTaskStorage);
         AddTasksUseCase addTasksUseCase = new AddTasksUseCase(taskRepository);
+
+        CompositeDisposable disposeBag = new CompositeDisposable();
 
         Bundle arguments = getIntent().getExtras();
         if (arguments != null) {
@@ -78,7 +88,25 @@ public class NewTaskActivity extends AppCompatActivity {
                 if (myvariant) {
                     name = newTaskName.getText().toString();
                 }
-                addTasksUseCase.execute(id, name);
+//                addTasksUseCase.execute(id, name);
+                Disposable disposable = Single.just(name)
+                        .map(name -> {
+                            addTasksUseCase.execute(id, name);
+                            return name;
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .subscribeWith(new DisposableSingleObserver<String>() {
+                            @Override
+                            public void onSuccess(@NonNull String s) {
+                                Log.e("TAG", "Add " + name + " task success");
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        });
+                disposeBag.add(disposable);
                 finish();
             }
         });

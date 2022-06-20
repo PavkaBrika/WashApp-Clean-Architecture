@@ -1,6 +1,7 @@
 package com.breckneck.washappca.presentation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,13 @@ import com.breckneck.washapp.data.repository.ZoneRepositoryImpl;
 import com.breckneck.washapp.data.storage.database.DataBaseZoneStorageImpl;
 import com.breckneck.washapp.domain.usecase.Zone.AddZoneUseCase;
 import com.breckneck.washappca.R;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class NewZoneActivity extends AppCompatActivity {
 
@@ -69,6 +77,7 @@ public class NewZoneActivity extends AppCompatActivity {
         };
         spinner.setOnItemSelectedListener(itemSelectedListener);
 
+        CompositeDisposable disposeBag = new CompositeDisposable();
         Button ok = findViewById(R.id.okAddNewZoneButton);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +85,24 @@ public class NewZoneActivity extends AppCompatActivity {
                 if (myvariant) {
                     name = newZoneName.getText().toString();
                 }
-                addZoneUseCase.execute(name);
+                Disposable disposable = Single.just(name)
+                        .map(name -> {
+                            addZoneUseCase.execute(name);
+                            return name;
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .subscribeWith(new DisposableSingleObserver<String>() {
+                            @Override
+                            public void onSuccess(@NonNull String s) {
+                                Log.e("TAG", "Zone " + s + " add success");
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        });
+                disposeBag.add(disposable);
                 finish();
             }
         });

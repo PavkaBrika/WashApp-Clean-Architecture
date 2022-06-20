@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +20,14 @@ import com.breckneck.washappca.adapter.ZoneAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,8 +74,27 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        zonesList = getZonesUseCase.execute();
-        ZoneAdapter adapter = new ZoneAdapter(getApplicationContext(), zonesList, zoneClickListener);
-        recyclerView.setAdapter(adapter);
+        CompositeDisposable disposeBag = new CompositeDisposable();
+        Disposable disposable = Single.just(zonesList)
+                .map(list -> {
+                    list = getZonesUseCase.execute();
+                    return list;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<List<ZoneApp>>() {
+                    @Override
+                    public void onSuccess(@NonNull List<ZoneApp> zoneApps) {
+                        ZoneAdapter adapter = new ZoneAdapter(getApplicationContext(), zoneApps, zoneClickListener);
+                        recyclerView.setAdapter(adapter);
+                        Log.e("TAG", "Zones load success");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        disposeBag.add(disposable);
     }
 }

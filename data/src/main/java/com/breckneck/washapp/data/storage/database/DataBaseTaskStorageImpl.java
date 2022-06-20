@@ -23,7 +23,7 @@ public class DataBaseTaskStorageImpl implements TaskStorage {
 
     public DataBaseTaskStorageImpl(Context context) {
         this.context = context;
-        db = Room.databaseBuilder(context, AppDataBase.class, "ZoneDataBase").allowMainThreadQueries().build();
+        db = Room.databaseBuilder(context, AppDataBase.class, "ZoneDataBase").build();
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME_2, Context.MODE_PRIVATE);
     }
 
