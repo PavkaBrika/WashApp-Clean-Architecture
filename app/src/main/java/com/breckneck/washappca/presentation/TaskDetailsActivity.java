@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +30,10 @@ import com.breckneck.washapp.data.storage.database.DataBaseTaskStorageImpl;
 import com.breckneck.washapp.domain.usecase.Task.CheckFrequencyUseCase;
 import com.breckneck.washapp.domain.usecase.Task.DeleteTaskUseCase;
 import com.breckneck.washapp.domain.usecase.Task.GetTimeToNotificationUseCase;
+import com.breckneck.washapp.domain.usecase.Task.SubstractNotificationUseCase;
 import com.breckneck.washappca.R;
 import com.breckneck.washappca.broadcastreceiver.NotificationReceiver;
+import com.breckneck.washappca.broadcastreceiver.SubstractionFrequencyReceiver;
 
 import java.util.Calendar;
 
@@ -90,7 +93,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
         });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("test", "test", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("test", "testchannel", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("description");
+
+
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -99,15 +105,17 @@ public class TaskDetailsActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar notifyme = Calendar.getInstance();
-                notifyme.set(Calendar.HOUR_OF_DAY, 0);
-                notifyme.set(Calendar.MINUTE, 33);
-                notifyme.set(Calendar.SECOND, 0);
+                Toast.makeText(getApplicationContext(), "Button is clicked", Toast.LENGTH_SHORT).show();
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.set(Calendar.HOUR_OF_DAY, 0);
+//                calendar.set(Calendar.MINUTE, 33);
+//                calendar.set(Calendar.SECOND, 0);
 
-                Intent intent = new Intent(TaskDetailsActivity.this, NotificationReceiver.class);
+                Intent intent = new Intent(TaskDetailsActivity.this, SubstractionFrequencyReceiver.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskDetailsActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
+                long time = System.currentTimeMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP, time + 3000, pendingIntent);
             }
         });
 

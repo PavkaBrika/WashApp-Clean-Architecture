@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.breckneck.washappca">
 
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +12,9 @@
         android:theme="@style/Theme.WashApp">
         <receiver
             android:name=".broadcastreceiver.NotificationReceiver" >
+        </receiver>
+        <receiver
+            android:name=".broadcastreceiver.SubstractionFrequencyReceiver" >
         </receiver>
         <activity
             android:name=".presentation.MainActivity"

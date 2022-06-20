@@ -28,6 +28,12 @@ public interface ZoneDao {
     @Query("SELECT * FROM task WHERE zoneId = :id")
     List<Task> getTasksByZoneId(long id);
 
+    @Query("UPDATE task SET frequency = frequency - 1")
+    void substractFrequency();
+
+    @Query("SELECT * FROM task WHERE frequency = 0")
+    List<Task> getTaskFrequencyNull();
+
     @Insert
     void insertZone(Zone zone);
 

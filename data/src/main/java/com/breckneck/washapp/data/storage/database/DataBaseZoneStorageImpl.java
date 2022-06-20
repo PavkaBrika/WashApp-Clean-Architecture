@@ -12,11 +12,6 @@ import com.breckneck.washapp.data.storage.entity.Zone;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 public class DataBaseZoneStorageImpl implements ZoneStorage {
 
     private final String SHARED_PREFS_NAME = "shared_prefs_name";

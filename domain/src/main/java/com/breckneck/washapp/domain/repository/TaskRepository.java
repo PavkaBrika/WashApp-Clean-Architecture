@@ -17,4 +17,8 @@ public interface TaskRepository {
     TaskApp checkFrequency(long id);
 
     int getTaskFrequency(long id);
+
+    void substractFrequency();
+
+    List<TaskApp> getNullFrequencyTasks();
 }

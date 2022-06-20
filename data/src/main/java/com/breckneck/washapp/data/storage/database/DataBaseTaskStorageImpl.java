@@ -67,4 +67,15 @@ public class DataBaseTaskStorageImpl implements TaskStorage {
         return task.frequency;
     }
 
+    @Override
+    public void substractFrequency() {
+        db.zoneDao().substractFrequency();
+    }
+
+    @Override
+    public List<Task> getNullFrequencyTasks() {
+        tasksList = db.zoneDao().getTaskFrequencyNull();
+        return tasksList;
+    }
+
 }

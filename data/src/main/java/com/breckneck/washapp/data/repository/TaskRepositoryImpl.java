@@ -56,5 +56,17 @@ public class TaskRepositoryImpl implements TaskRepository {
         return taskStorage.getTaskFrequency(id);
     }
 
+    @Override
+    public void substractFrequency() {
+        taskStorage.substractFrequency();
+    }
+
+    @Override
+    public List<TaskApp> getNullFrequencyTasks() {
+        List<Task> tasksList = taskStorage.getNullFrequencyTasks();
+        List<TaskApp> taskAppList = tasksList.stream().map(task -> new TaskApp(task.id, task.zoneId, task.taskName)).collect(Collectors.toList());
+        return taskAppList;
+    }
+
 
 }

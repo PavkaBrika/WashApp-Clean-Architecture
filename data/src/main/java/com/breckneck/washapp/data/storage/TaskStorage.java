@@ -6,15 +6,19 @@ import java.util.List;
 
 public interface TaskStorage {
 
-    public List<Task> getAllTasks(long id);
+    List<Task> getAllTasks(long id);
 
-    public void insertTask(Task task);
+    void insertTask(Task task);
 
-    public void deleteTask(Task task);
+    void deleteTask(Task task);
 
-    public void updateTask(long id, int frequency);
+    void updateTask(long id, int frequency);
 
-    public Task checkTask(long id);
+    Task checkTask(long id);
 
-    public int getTaskFrequency(long id);
+    int getTaskFrequency(long id);
+
+    void substractFrequency();
+
+    List<Task> getNullFrequencyTasks();
 }
